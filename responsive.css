@@ -1,0 +1,139 @@
+/* ==============================
+   RESPONSIVE DESIGN
+   ============================== */
+
+@media (max-width: 768px) {
+    .container {
+        border-radius: 0;
+    }
+    
+    .header {
+        padding: 15px;
+    }
+    
+    .logo-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .title {
+        font-size: 24px;
+        letter-spacing: 1px;
+    }
+    
+    .subtitle {
+        font-size: 14px;
+    }
+    
+    .datetime-container {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px 15px;
+    }
+    
+    .separator {
+        display: none;
+    }
+    
+    .date-time {
+        justify-content: center;
+    }
+    
+    .main-content {
+        padding: 15px;
+    }
+    
+    .navigation {
+        flex-wrap: wrap;
+    }
+    
+    .nav-btn {
+        min-width: 120px;
+        padding: 10px 8px;
+        font-size: 14px;
+    }
+    
+    .nav-btn i {
+        font-size: 14px;
+    }
+    
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-row {
+        flex-direction: column;
+    }
+    
+    .filter-group {
+        min-width: 100%;
+    }
+    
+    .form-actions, .filter-actions, .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-primary, .btn-secondary, .btn-success, .btn-danger {
+        width: 100%;
+    }
+    
+    .data-table {
+        font-size: 12px;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        justify-content: center;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 20px;
+    }
+    
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .section-title {
+        font-size: 20px;
+    }
+    
+    .nav-btn {
+        min-width: 100px;
+        padding: 8px 5px;
+        font-size: 12px;
+    }
+    
+    .quick-time-buttons {
+        flex-direction: column;
+    }
+    
+    .quick-time-btn {
+        width: 100%;
+    }
+}

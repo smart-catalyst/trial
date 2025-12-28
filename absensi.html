@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Catalyst - Form Absensi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/LdHp3Tpm/logo-grub-Recovered.png">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="https://i.ibb.co/LdHp3Tpm/logo-grub-Recovered.png" alt="Logo Smart Catalyst" class="logo">
+                <div class="title-container">
+                    <h1 class="title">SMART CATALYST</h1>
+                    <p class="subtitle">Form Absensi Kehadiran Tutor</p>
+                </div>
+            </div>
+            <div class="datetime-container">
+                <div class="date-time">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span id="currentDate"></span>
+                </div>
+                <div class="separator">|</div>
+                <div class="date-time">
+                    <i class="fas fa-clock"></i>
+                    <span id="currentTime"></span>
+                </div>
+            </div>
+            <div class="quote-container">
+                "Keikhlasan mengajar adalah kunci keberhasilan."
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="navigation">
+            <a href="index.html" class="nav-btn">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="absensi.html" class="nav-btn active">
+                <i class="fas fa-clipboard-check"></i> Absensi
+            </a>
+            <a href="laporan.html" class="nav-btn">
+                <i class="fas fa-chart-bar"></i> Laporan Absensi
+            </a>
+            <a href="laporan-bulanan.html" class="nav-btn">
+                <i class="fas fa-file-alt"></i> Laporan Bulanan
+            </a>
+            <a href="kirim.html" class="nav-btn">
+                <i class="fab fa-whatsapp"></i> Kirim Laporan
+            </a>
+            <a href="preview.html" class="nav-btn">
+                <i class="fas fa-eye"></i> Preview Laporan
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h2 class="section-title"><i class="fas fa-clipboard-check"></i> Form Absensi Mengajar</h2>
+            
+            <form id="absensiForm" class="form-container">
+                <!-- Data Pengajar -->
+                <div class="form-section">
+                    <h3 class="section-subtitle"><i class="fas fa-user-tie"></i> Data Pengajar</h3>
+                    
+                    <div class="form-group">
+                        <label for="tutor" class="required">Nama Tutor</label>
+                        <select id="tutor" name="tutor" required>
+                            <option value="">-- Pilih Tutor --</option>
+                            <!-- Options akan diisi oleh JavaScript -->
+                        </select>
+                        <div class="error-message" id="tutorError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siswaId" class="required">ID Siswa</label>
+                        <select id="siswaId" name="siswaId" required>
+                            <option value="">-- Pilih Siswa --</option>
+                        </select>
+                        <div class="error-message" id="siswaIdError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tanggal" class="required">Tanggal Mengajar</label>
+                        <input type="date" id="tanggal" name="tanggal" required>
+                        <div class="error-message" id="tanggalError"></div>
+                    </div>
+                </div>
+
+                <!-- Data Siswa (Auto-filled) -->
+                <div class="form-section">
+                    <h3 class="section-subtitle"><i class="fas fa-user-graduate"></i> Data Siswa</h3>
+                    
+                    <div class="form-group">
+                        <label for="namaSiswa">Nama Siswa</label>
+                        <input type="text" id="namaSiswa" name="namaSiswa" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="alamatSiswa">Alamat Siswa</label>
+                        <textarea id="alamatSiswa" name="alamatSiswa" rows="2" readonly></textarea>
+                    </div>
+                </div>
+
+                <!-- Waktu Mengajar -->
+                <div class="form-section">
+                    <h3 class="section-subtitle"><i class="fas fa-clock"></i> Waktu Mengajar</h3>
+                    
+                    <div class="form-group">
+                        <label for="jamDatang" class="required">Jam Datang</label>
+                        <input type="time" id="jamDatang" name="jamDatang" required>
+                        <div class="error-message" id="jamDatangError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jamPulang" class="required">Jam Pulang</label>
+                        <input type="time" id="jamPulang" name="jamPulang" required>
+                        <div class="error-message" id="jamPulangError"></div>
+                    </div>
+
+                    <div class="quick-time-buttons">
+                        <button type="button" class="quick-time-btn" onclick="setQuickTime('08:00', '10:00')">
+                            Pagi (08:00-10:00)
+                        </button>
+                        <button type="button" class="quick-time-btn" onclick="setQuickTime('14:00', '16:00')">
+                            Siang (14:00-16:00)
+                        </button>
+                        <button type="button" class="quick-time-btn" onclick="setQuickTime('19:00', '21:00')">
+                            Malam (19:00-21:00)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rencana Pembelajaran -->
+                <div class="form-section">
+                    <h3 class="section-subtitle"><i class="fas fa-book"></i> Rencana Pembelajaran</h3>
+                    
+                    <div class="form-group">
+                        <label for="rencanaHariIni" class="required">Rencana Pembelajaran Hari Ini</label>
+                        <textarea id="rencanaHariIni" name="rencanaHariIni" required></textarea>
+                        <div class="error-message" id="rencanaHariIniError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rencanaSelanjutnya" class="required">Rencana Selanjutnya</label>
+                        <textarea id="rencanaSelanjutnya" name="rencanaSelanjutnya" required></textarea>
+                        <div class="error-message" id="rencanaSelanjutnyaError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="kesulitan">Kesulitan Saat Mengajar</label>
+                        <textarea id="kesulitan" name="kesulitan" placeholder="Jelaskan kesulitan yang dihadapi (jika ada)"></textarea>
+                    </div>
+                </div>
+
+                <!-- Bukti Kehadiran -->
+                <div class="form-section">
+                    <h3 class="section-subtitle"><i class="fas fa-camera"></i> Bukti Kehadiran</h3>
+                    
+                    <div class="form-group">
+                        <label for="bukti" class="required">Foto Bukti Kehadiran</label>
+                        
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                            <button type="button" class="btn-secondary" onclick="triggerCamera()">
+                                <i class="fas fa-camera"></i> Ambil Foto
+                            </button>
+                            <button type="button" class="btn-secondary" onclick="triggerGallery()">
+                                <i class="fas fa-images"></i> Pilih dari Galeri
+                            </button>
+                        </div>
+                        
+                        <input type="file" id="bukti" name="bukti" accept="image/*" style="display: none;" required>
+                        <div class="error-message" id="buktiError"></div>
+                        
+                        <div class="file-info" id="fileInfo" style="display: none;">
+                            <p><i class="fas fa-file-image"></i> <span id="fileName"></span></p>
+                            <p id="fileSize"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="image-preview" id="imagePreview" style="display: none;">
+                        <img id="previewImg" src="" alt="Preview Foto">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="window.history.back()">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Simpan Absensi
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 SMART CATALYST - Form Absensi Kehadiran Tutor</p>
+        </footer>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <i id="notificationIcon" class="notification-icon"></i>
+            <div id="notificationMessage" class="notification-message"></div>
+            <button class="notification-close" onclick="hideNotification()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="utils.js"></script>
+    <script src="absensi.js"></script>
+    <script>
+        // Set default tanggal ke hari ini
+        document.getElementById('tanggal').valueAsDate = new Date();
+        
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('id-ID', dateOptions);
+            document.getElementById('currentTime').textContent = now.toLocaleTimeString('id-ID', timeOptions);
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Quick time buttons
+        function setQuickTime(start, end) {
+            document.getElementById('jamDatang').value = start;
+            document.getElementById('jamPulang').value = end;
+        }
+
+        // Trigger camera
+        function triggerCamera() {
+            document.getElementById('bukti').setAttribute('capture', 'camera');
+            document.getElementById('bukti').click();
+        }
+
+        // Trigger gallery
+        function triggerGallery() {
+            document.getElementById('bukti').removeAttribute('capture');
+            document.getElementById('bukti').click();
+        }
+
+        // Preview image
+        document.getElementById('bukti').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validasi file
+            const validation = SmartCatalystUtils.validateFile(file);
+            if (!validation.isValid) {
+                validation.errors.forEach(error => {
+                    showNotification(error, 'error');
+                });
+                e.target.value = '';
+                return;
+            }
+
+            // Tampilkan info file
+            document.getElementById('fileInfo').style.display = 'block';
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = `Ukuran: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+
+            // Preview untuk gambar
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                document.getElementById('imagePreview').style.display = 'none';
+            }
+        });
+
+        // Notification functions
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const messageEl = document.getElementById('notificationMessage');
+            const iconEl = document.getElementById('notificationIcon');
+            
+            notification.className = `notification ${type}`;
+            messageEl.textContent = message;
+            
+            if (type === 'success') {
+                iconEl.className = 'notification-icon fas fa-check-circle';
+            } else {
+                iconEl.className = 'notification-icon fas fa-exclamation-circle';
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                hideNotification();
+            }, 5000);
+        }
+        
+        function hideNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+        }
+    </script>
+</body>
+</html>
